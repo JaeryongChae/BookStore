@@ -8,10 +8,115 @@
 
 import UIKit
 
-class BookTableViewController: UITableViewController {
+class BookTableViewController: UITableViewController, UIAlertViewDelegate {
     
     var books = [Book]()
 
+    @IBAction func sowPopup(sender: AnyObject) {
+// Case #1 : AlertView
+//        let alert = UIAlertView(title: "선택",
+//                                message: "항목을 선택하세요",
+//                                delegate: self,
+//                                cancelButtonTitle: "취소",
+//                                otherButtonTitles: "버튼 A", "버튼 B", "버튼 C") // iOS 9.0 에서 사용 했음.
+//        alert.show()
+        
+// Case #2 : AlertController #1 // UIAlertControllerStyle.Alert
+//        let alert = UIAlertController(title: "알림",
+//                                      message: "샘플",
+//                                      preferredStyle: UIAlertControllerStyle.Alert)
+//        
+//        let cancelAction = UIAlertAction(title: "취소",
+//                                         style: UIAlertActionStyle.Cancel,
+//                                         handler: nil)
+//        
+//        alert.addAction(cancelAction) // 취소버튼 추가
+//        self.presentViewController(alert, animated: true, completion: nil) // Popup 창 보여주기
+//
+        
+// Case #3 : AlertController #2 // .ActionSheet
+//        let alert = UIAlertController(title: "",
+//                                      message: "액션시트",
+//                                      preferredStyle: .ActionSheet)
+//        
+//        let cancelAction = UIAlertAction(title:"취소", style: .Cancel, handler:nil)
+//        let saveAction = UIAlertAction(title:"저장", style: .Destructive) {  // handler표기 하지 않아도 됨.
+//            (_) in
+//            print("저장완료!!")
+//        }
+//        /*
+//        let saveAction = UIAlertAction(title:"저장", style: .Destructive, handler: {
+//                                                                        (_) in
+//                                                                        print("저장완료!!") }) 와 동일한 표현
+//        */
+//    
+//        alert.addAction(cancelAction)
+//        alert.addAction(saveAction)
+//        
+//        self.presentViewController(alert, animated: true, completion: nil)
+        
+        
+// Case #4 : AlertController #3 // .ActionSheet
+//        let alert = UIAlertController(title: "로그인",
+//                                      message: "서비스",
+//                                      preferredStyle: .Alert)
+//        let cancelAction = UIAlertAction(title:"취소",
+//                                         style: .Cancel,
+//                                         handler: nil)
+//        let facebookLogin = UIAlertAction(title: "Facebook",
+//                                          style: .Default,
+//                                          handler: { (action) in print("Facebook") })
+//        let kakaoLogin = UIAlertAction(title: "Kakao",
+//                                          style: .Default,
+//                                          handler: { (action) in print("Kakao") })
+//        let twitterLogin = UIAlertAction(title: "Twitter",
+//                                       style: .Default,
+//                                       handler: { (action) in print("Twitter") })
+//        
+//        alert.addAction(cancelAction)
+//        alert.addAction(facebookLogin)
+//        alert.addAction(kakaoLogin)
+//        alert.addAction(twitterLogin)
+//        
+//        self.presentViewController(alert, animated: true, completion: nil)
+        
+// Case #5 : AlertController #4 // .ActionSheet
+        let alert = UIAlertController(title: "로그인",
+                                      message: "로그인 정보를 입력하세요.",
+                                      preferredStyle: .Alert)
+        
+        alert.addTextFieldWithConfigurationHandler({(textField) in textField.placeholder = "아이디" })
+        alert.addTextFieldWithConfigurationHandler({(textField) in textField.placeholder = "비밀번호"
+                                                    textField.secureTextEntry = true}) // 입력값이 보이지 않도록
+        
+
+        let okAction = UIAlertAction(title: "확인",
+                                     style: .Default,
+                                     handler: {
+                                        (_) in
+                                        if let id = alert.textFields?[0].text {
+                                            print("id = \(id)")
+                                        }
+                                        if let password = alert.textFields?[1].text {
+                                            print("password = \(password)")
+                                        }
+                                        })
+        
+        let cancelAction = UIAlertAction(title: "취소",
+                                         style: .Cancel,
+                                         handler:nil)
+        
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+   }
+
+// Case #1 : AlertView
+//    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex:Int) {
+//        print("Button Index = \(buttonIndex)")
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
