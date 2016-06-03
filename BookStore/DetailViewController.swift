@@ -28,7 +28,7 @@ class DetailViewController: UIViewController {
             bookWriter.text = tmpBook.writer
             bookPublisher.text = tmpBook.publisher
             bookDate.text = tmpBook.date
-            bookDescription.text = tmpBook.description
+            bookDescription.text = tmpBook.desc
         }
     }
 
